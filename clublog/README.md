@@ -106,7 +106,7 @@ while IFS= read -r line; do
          -d "adif=$ENCODED_ADIF" \
          https://clublog.org/realtime.php)
 ````
-The script processes each new log entry individually:
+The script processes each new log entry individually:  
 URL-encodes the ADIF record  
 Uploads the record to Club Log using curl  
 Checks the response from Club Log  
@@ -123,7 +123,7 @@ else
 fi
 done < "$TEMP_FILE"
 ````
-The script interprets the response from Club Log:
+The script interprets the response from Club Log:  
 If the response contains "OK", it logs a successful upload  
 If the response contains "Dupe", it logs that the entry was a duplicate  
 For any other response, it logs an error  
