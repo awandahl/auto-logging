@@ -53,7 +53,8 @@ if [ "$CURRENT_LAST_LINE" == "$STORED_LAST_LINE" ]; then
 fi
 
 ```
-The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
+The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.  
+If no last line file exists, it will be created.
 
 ### 2. Extract New Log Entries:
 ```
