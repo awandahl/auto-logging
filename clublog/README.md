@@ -56,7 +56,7 @@ This function URL-encodes strings, which is necessary for sending data via HTTP,
 
 ## Main Script Logic
 
-1. Check for New Entries
+### 1. Check for New Entries
 ````
 if [ -f "$LAST_LINE_FILE" ]; then
     STORED_LAST_LINE=$(cat "$LAST_LINE_FILE")
@@ -74,7 +74,7 @@ fi
 ````
 The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
 
-2. Extract New Log Entries
+### 2. Extract New Log Entries
 ````
 # Extract new lines from the log file
 ESCAPED_STORED_LAST_LINE=$(echo "$STORED_LAST_LINE" | sed 's/[&/\]/\\&/g')
@@ -141,8 +141,8 @@ After processing all new entries, the script updates the last line file with the
 
 ## Usage
 Ensure the configuration variables are set correctly for your Club Log account and file paths.  
-Make the script executable: chmod +x clublog_upload.sh  
-Run the script: ./clublog_upload.sh  
+Make the script executable: ````chmod +x clublog_upload.sh````  
+Run the script: ````./clublog_upload.sh````  
 The script can be run manually or set up as a cron job for automatic, periodic uploads.  
 
 ## Notes
