@@ -90,7 +90,7 @@ echo "$NEW_LINES" > "$TEMP_FILE"
 ````
 If there are new entries, the script extracts them from the log file, starting from the line after the last uploaded entry.
 
-4. Process Each New Entry
+### 3. Process Each New Entry
 ````
 while IFS= read -r line; do
     # URL-encode the ADIF record
@@ -111,7 +111,7 @@ URL-encodes the ADIF record
 Uploads the record to Club Log using curl  
 Checks the response from Club Log  
 
-5. Handle Club Log Responses
+### 4. Handle Club Log Responses
 ````
 if [[ "$RESPONSE" == *"OK"* ]]; then
     log_message "Log entry successfully uploaded to Club Log: $line"
@@ -128,7 +128,7 @@ If the response contains "OK", it logs a successful upload
 If the response contains "Dupe", it logs that the entry was a duplicate  
 For any other response, it logs an error  
 
-6. Update Last Line File
+### 5. Update Last Line File
 ````
 echo "$CURRENT_LAST_LINE" > "$LAST_LINE_FILE"
 
