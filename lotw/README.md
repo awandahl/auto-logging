@@ -1,5 +1,5 @@
 
-# LoTW (Logbook of The World) Upload Script
+# LoTW Upload Script
 
 This bash script automates the process of uploading ADIF (Amateur Data Interchange Format) log entries to LoTW (Logbook of The World). It's designed to work with WSJT-X log files and upload new entries since the last upload.
 
