@@ -14,6 +14,7 @@ CLUBLOG_API_KEY="*****"
 LOG_FILE="/home/aw/.local/share/WSJT-X/wsjtx_log.adi"
 LOG_OUTPUT="/home/aw/logsync/clublog/clublog_output.log"
 LAST_LINE_FILE="/home/aw/logsync/clublog/clublog_last_line.txt"
+````
 
 These variables set up the necessary configuration for the script:
 Club Log credentials (email, password, callsign, API key)
@@ -21,20 +22,25 @@ Path to the WSJT-X log file
 Path to the script's output log
 Path to a file that stores the last uploaded log entry
 Utility Functions
-Log Message Function
+
+##Log Message Function
+````
 bash
 log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_OUTPUT"
 }
-
+````
 This function writes timestamped messages to the log output file, helping track the script's activities.
+
 URL Encode Function
+````
 bash
 urlencode() {
     # ... (function body)
 }
-
+````
 This function URL-encodes strings, which is necessary for sending data via HTTP, especially when the data contains special characters.
+
 Main Script Logic
 1. Check for New Entries
 The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
