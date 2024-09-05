@@ -94,10 +94,7 @@ fi
 # Clean up the temporary file
 rm "$TEMP_FILE"
 ```
-The script uses xvfb-run to run tqsl (the LoTW signing and upload tool) with the temporary file containing new entries,  
-using xvfb-run to run tqsl in a virtual framebuffer, allowing it to run without a graphical environment.
-After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run.
-The temporary file is removed after the upload process.
+The script uses xvfb-run to run tqsl (the LoTW signing and upload tool) with the temporary file containing new entries, using xvfb-run to run tqsl in a virtual framebuffer, allowing it to run without a graphical environment. After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run. The temporary file is removed after the upload process.
 
 ## Usage
 Ensure the configuration variables are set correctly for your LoTW account and file paths.  
