@@ -16,12 +16,12 @@ LOG_OUTPUT="/home/aw/logsync/clublog/clublog_output.log"
 LAST_LINE_FILE="/home/aw/logsync/clublog/clublog_last_line.txt"
 ````
 
-These variables set up the necessary configuration for the script:
-Club Log credentials (email, password, callsign, API key)
-Path to the WSJT-X log file
-Path to the script's output log
-Path to a file that stores the last uploaded log entry
-Utility Functions
+These variables set up the necessary configuration for the script:  
+Club Log credentials (email, password, callsign, API key)  
+Path to the WSJT-X log file  
+Path to the script's output log  
+Path to a file that stores the last uploaded log entry  
+Utility Functions  
 
 ##Log Message Function
 ````
