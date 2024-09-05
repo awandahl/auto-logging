@@ -17,12 +17,12 @@ LAST_LINE_FILE="/home/aw/logsync/clublog/clublog_last_line.txt"
 ````
 
 These variables set up the necessary configuration for the script:  
-Club Log credentials (email, password, callsign, API key)  
-Path to the WSJT-X log file  
-Path to the script's output log  
-Path to a file that stores the last uploaded log entry  
-Utility Functions  
-Log Message Function
+- Club Log credentials (email, password, callsign, API key)  
+- Path to the WSJT-X log file  
+- Path to the script's output log  
+- Path to a file that stores the last uploaded log entry  
+- Utility Functions  
+- Log Message Function
 
 ````
 bash
@@ -107,9 +107,9 @@ while IFS= read -r line; do
          https://clublog.org/realtime.php)
 ````
 The script processes each new log entry individually:  
-URL-encodes the ADIF record  
-Uploads the record to Club Log using curl  
-Checks the response from Club Log  
+- URL-encodes the ADIF record  
+- Uploads the record to Club Log using curl  
+- Checks the response from Club Log  
 
 ### 4. Handle Club Log Responses
 ````
@@ -124,9 +124,9 @@ fi
 done < "$TEMP_FILE"
 ````
 The script interprets the response from Club Log:  
-If the response contains "OK", it logs a successful upload  
-If the response contains "Dupe", it logs that the entry was a duplicate  
-For any other response, it logs an error  
+- If the response contains "OK", it logs a successful upload  
+- If the response contains "Dupe", it logs that the entry was a duplicate  
+- For any other response, it logs an error  
 
 ### 5. Update Last Line File
 ````
@@ -146,8 +146,8 @@ Run the script: ````./clublog_upload.sh````
 The script can be run manually or set up as a cron job for automatic, periodic uploads.  
 
 ## Notes
-The script uses the Club Log real-time API (https://clublog.org/realtime.php) for uploads.
-It's designed to work with WSJT-X log files, but can be adapted for other ADIF-formatted logs.
-Ensure your Club Log credentials are kept secure, as they are stored in plain text in the script.
+The script uses the Club Log real-time API (https://clublog.org/realtime.php) for uploads.  
+It's designed to work with WSJT-X log files, but can be adapted for other ADIF-formatted logs.  
+Ensure your Club Log credentials are kept secure, as they are stored in plain text in the script.  
 
 
