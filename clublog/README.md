@@ -21,9 +21,9 @@ These variables set up the necessary configuration for the script:
 - Path to the WSJT-X log file  
 - Path to the script's output log  
 - Path to a file that stores the last uploaded log entry  
-- Utility Functions  
-- Log Message Function
-
+- Utility Functions
+   
+## Log Message Function
 ````
 bash
 log_message() {
