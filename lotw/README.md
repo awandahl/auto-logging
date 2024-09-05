@@ -29,7 +29,7 @@ log_message() {
 This function writes timestamped messages to the log output file, helping track the script's activities.
 
 ## Main Script Logic
-1. Check for New Entries:
+### 1. Check for New Entries:
 ```
 # Get the last line of the current log file
 CURRENT_LAST_LINE=$(tail -n 1 "$LOG_FILE")
@@ -55,7 +55,7 @@ fi
 ```
 The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
 
-2. Extract New Log Entries:
+### 2. Extract New Log Entries:
 ```
 log_message "Starting LoTW upload process"
 
@@ -75,7 +75,7 @@ echo "$NEW_LINES" > "$TEMP_FILE"
 If there are new entries, the script extracts them from the log file, starting from the line after the last uploaded entry.
 The script writes the new log entries to a temporary file and makes a backup of the log file.
 
-6. Upload to LoTW:
+### 3. Upload to LoTW:
 ```
 # Use xvfb-run to run tqsl with the temporary file
 /usr/bin/xvfb-run -a /usr/local/bin/tqsl -x -u -d -a compliant -c "$DEFAULT_CALLSIGN" -l "$STATION_LOCATION" "$TEMP_FILE" 2>> "$LOG_OUTPUT"
@@ -97,7 +97,7 @@ The script uses xvfb-run to run tqsl (the LoTW signing and upload tool) with the
 using xvfb-run to run tqsl in a virtual framebuffer, allowing it to run without a graphical environment.
 After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run.
 The temporary file is removed after the upload process.
-```
+
 ## Usage
 Ensure the configuration variables are set correctly for your LoTW account and file paths.  
 Make sure tqsl is installed and configured with valid LoTW certificates.
