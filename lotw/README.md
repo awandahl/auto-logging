@@ -103,3 +103,6 @@ Make the script executable: ```chmod +x lotw_upload.sh```
 Run the script: ```./lotw_upload.sh```
 The script can be run manually or set up as a cron job for automatic, periodic uploads.
 
+
+
+
