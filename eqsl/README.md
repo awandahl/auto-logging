@@ -39,8 +39,16 @@ This function writes timestamped messages to the log output file.
 
 ## URL Encode Function
 ```
+# URL-encode function
 urlencode() {
-    # ... (function body)
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf "$c" ;;
+            *) printf '%%%02X' "'$c"
+        esac
+    done
 }
 ```
 This function URL-encodes strings for safe transmission over HTTP.
@@ -48,7 +56,26 @@ This function URL-encodes strings for safe transmission over HTTP.
 ## Main Script Logic
 Check for New Entries: 
 ```
+# Get the last line of the current log file to determine the most recent entry
+CURRENT_LAST_LINE=$(tail -n 1 "$LOG_FILE")
 
+# Check if the last uploaded line file exists and read its content
+if [ -f "$LAST_LINE_FILE" ]; then
+    STORED_LAST_LINE=$(cat "$LAST_LINE_FILE")
+else
+    # Initialize the last line file with the current last line if it doesn't exist
+    echo "$CURRENT_LAST_LINE" > "$LAST_LINE_FILE"
+    log_message "Initialized LAST_LINE_FILE with the current last line."
+    echo "Initialized LAST_LINE_FILE with the current last line. No new logs to upload."
+    exit 0
+fi
+
+# Compare the current last line with the stored last line to check for new entries
+if [ "$CURRENT_LAST_LINE" == "$STORED_LAST_LINE" ]; then
+    log_message "No changes in log file since last upload. Exiting."
+    echo "No changes in log file since last upload. Nothing to do."
+    exit 0
+fi
 ```
 The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
 
