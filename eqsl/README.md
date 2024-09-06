@@ -92,15 +92,15 @@ The temporary file is removed after the upload process.
 ## Notable Features
 - The script can optionally include custom comments for each QSO.  
 - It handles duplicate entries by reporting them separately.  
- - The script uses URL encoding to ensure special characters are properly transmitted.  
+- The script uses URL encoding to ensure special characters are properly transmitted.  
    
 ## Usage
-Ensure the configuration variables are set correctly for your eQSL account and file paths.  
-Make the script executable: ```chmod +x eqsl_upload.sh```  
-Run the script: ```./eqsl_upload.sh```  
-The script can be run manually or set up as a cron job for automatic, periodic uploads.  
+- Ensure the configuration variables are set correctly for your eQSL account and file paths.  
+- Make the script executable: ```chmod +x eqsl_upload.sh```  
+- Run the script: ```./eqsl_upload.sh```  
+- The script can be run manually or set up as a cron job for automatic, periodic uploads.  
 
-##Notes
-The script is designed to work with WSJT-X log files but can be adapted for other ADIF-formatted logs.  
-Ensure your eQSL credentials are kept secure, as they are stored in plain text in the script.  
-The script includes error logging to help with troubleshooting.  
+## Notes
+- The script is designed to work with WSJT-X log files but can be adapted for other ADIF-formatted logs.  
+- Ensure your eQSL credentials are kept secure, as they are stored in plain text in the script.  
+- The script includes error logging to help with troubleshooting.  
