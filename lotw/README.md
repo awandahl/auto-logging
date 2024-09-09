@@ -97,11 +97,11 @@ rm "$TEMP_FILE"
 The script uses xvfb-run to run tqsl (the LoTW signing and upload tool) with the temporary file containing new entries, allowing it to run without a graphical environment. After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run. The temporary file is removed after the upload process.
 
 ## Usage
-Ensure the configuration variables are set correctly for your LoTW account and file paths.  
-Make sure tqsl is installed and configured with valid LoTW certificates.
-Make the script executable: ```chmod +x lotw_upload.sh```
-Run the script: ```./lotw_upload.sh```
-The script can be run manually or set up as a cron job for automatic, periodic uploads.
+- Ensure the configuration variables are set correctly for your LoTW account and file paths.  
+- Make sure tqsl is installed and configured with valid LoTW certificates.
+- Make the script executable: ```chmod +x lotw_upload.sh```
+- Run the script: ```./lotw_upload.sh```
+- The script can be run manually or set up as a cron job for automatic, periodic uploads.
 
 
 
