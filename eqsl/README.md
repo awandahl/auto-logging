@@ -153,7 +153,7 @@ rm "$TEMP_FILE"
 The temporary file is removed after the upload process.
 
 ## Notable Features
-- The script can optionally include custom comments for each QSO.  
+- [NOT YET WORKING PROPERLY] The script can optionally include custom comments for each QSO.  
 - It handles duplicate entries by reporting them separately.  
 - The script uses URL encoding to ensure special characters are properly transmitted.  
    
