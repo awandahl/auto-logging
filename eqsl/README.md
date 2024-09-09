@@ -54,7 +54,7 @@ urlencode() {
 This function URL-encodes strings for safe transmission over HTTP.
 
 ## Main Script Logic
-Check for New Entries: 
+### 1. Check for New Entries: 
 ```
 # Get the last line of the current log file to determine the most recent entry
 CURRENT_LAST_LINE=$(tail -n 1 "$LOG_FILE")
@@ -79,7 +79,7 @@ fi
 ```
 The script compares the last line of the current log file with the stored last line from the previous run. If they're the same, it means there are no new entries to upload, and the script exits.
 
-Extract New Log Entries: 
+### 2. Extract New Log Entries: 
 ```
 # Escape special characters in the stored last line for safe use in sed
 ESCAPED_STORED_LAST_LINE=$(echo "$STORED_LAST_LINE" | sed 's/[&/\]/\\&/g')
@@ -89,7 +89,7 @@ NEW_LINES=$(sed -n "/$ESCAPED_STORED_LAST_LINE/,\$p" "$LOG_FILE" | tail -n +2)
 ```
 If there are new entries, the script extracts them from the log file, starting from the line after the last uploaded entry.
 
-Prepare Temporary File: 
+### 3. Prepare Temporary File: 
 ```
 # Write the new lines to a temporary file for processing
 TEMP_FILE=$(mktemp)
@@ -100,7 +100,7 @@ echo "<ADIF_VERS:5>3.1.0
 ```
 The script creates a temporary file with the new log entries, including ADIF header information.
 
-Upload to eQSL: 
+### 4. Upload to eQSL: 
 ```
 # Use curl to upload the new log entries to eQSL.cc and capture the response
 RESPONSE=$(curl -s --data-urlencode "ADIFData=$(<"$TEMP_FILE")" \
@@ -108,7 +108,7 @@ RESPONSE=$(curl -s --data-urlencode "ADIFData=$(<"$TEMP_FILE")" \
 ```
 The script uses curl to upload the new log entries to eQSL.cc
 
-Parse Response: 
+### 5. Parse Response: 
 ```
 # Parse the response to get the number of records added and duplicates
 RECORDS_ADDED=$(echo "$RESPONSE" | grep -oP 'Result: \K\d+(?= out of \d+ records added)')
@@ -117,8 +117,7 @@ DUPLICATES=$((TOTAL_RECORDS - RECORDS_ADDED))
 ```
 The script parses the response from eQSL to determine the number of records added and duplicates found.
 
-Handle Upload Result: Based on the parsed response, the script logs the result of the upload (success, duplicates, or errors).
-Update Last Line File: 
+### 6. Handle Upload Result: 
 ```
 # Check if any records were added successfully
 if [ -z "$RECORDS_ADDED" ]; then
@@ -143,9 +142,10 @@ else
     echo "Server response: $RESPONSE" >> "$LOG_OUTPUT"
 fi
 ```
+Based on the parsed response, the script logs the result of the upload (success, duplicates, or errors).
 After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run.
 
-Cleanup: 
+### 7. Cleanup: 
 ```
 # Clean up the temporary file
 rm "$TEMP_FILE"
