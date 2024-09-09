@@ -154,8 +154,6 @@ The temporary file is removed after the upload process.
 
 ## Notable Features
 - [NOT YET WORKING PROPERLY] The script can optionally include custom comments for each QSO.  
-- It handles duplicate entries by reporting them separately.  
-- The script uses URL encoding to ensure special characters are properly transmitted.  
    
 ## Usage
 - Ensure the configuration variables are set correctly for your eQSL account and file paths.  
