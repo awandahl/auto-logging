@@ -138,14 +138,14 @@ echo "Club Log upload process completed"
 After processing all new entries, the script updates the last line file with the most recent log entry, preparing for the next run.
 
 ## Usage
-Ensure the configuration variables are set correctly for your Club Log account and file paths.  
-Make the script executable: ```chmod +x clublog_upload.sh```  
-Run the script: ```./clublog_upload.sh```  
-The script can be run manually or set up as a cron job for automatic, periodic uploads.  
+- Ensure the configuration variables are set correctly for your Club Log account and file paths.  
+- Make the script executable: ```chmod +x clublog_upload.sh```  
+- Run the script: ```./clublog_upload.sh```  
+- The script can be run manually or set up as a cron job for automatic, periodic uploads.  
 
 ## Notes
-The script uses the Club Log real-time API (https://clublog.org/realtime.php) for uploads.  
-It's designed to work with WSJT-X log files, but can be adapted for other ADIF-formatted logs.  
-Ensure your Club Log credentials are kept secure, as they are stored in plain text in the script.  
+- The script uses the Club Log real-time API (https://clublog.org/realtime.php) for uploads.  
+- It's designed to work with WSJT-X log files, but can be adapted for other ADIF-formatted logs.  
+- Ensure your Club Log credentials are kept secure, as they are stored in plain text in the script.  
 
 
