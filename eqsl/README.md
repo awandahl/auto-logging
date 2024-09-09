@@ -81,38 +81,74 @@ The script compares the last line of the current log file with the stored last l
 
 Extract New Log Entries: 
 ```
+# Escape special characters in the stored last line for safe use in sed
+ESCAPED_STORED_LAST_LINE=$(echo "$STORED_LAST_LINE" | sed 's/[&/\]/\\&/g')
 
+# Extract new lines from the log file since the last upload
+NEW_LINES=$(sed -n "/$ESCAPED_STORED_LAST_LINE/,\$p" "$LOG_FILE" | tail -n +2)
 ```
 If there are new entries, the script extracts them from the log file, starting from the line after the last uploaded entry.
 
 Prepare Temporary File: 
 ```
-
+# Write the new lines to a temporary file for processing
+TEMP_FILE=$(mktemp)
+echo "<ADIF_VERS:5>3.1.0
+<PROGRAMID:6>wsjt-x
+<PROGRAMVERSION:3>2.6
+<EOH>" > "$TEMP_FILE"
 ```
 The script creates a temporary file with the new log entries, including ADIF header information.
 
 Upload to eQSL: 
 ```
-
+# Use curl to upload the new log entries to eQSL.cc and capture the response
+RESPONSE=$(curl -s --data-urlencode "ADIFData=$(<"$TEMP_FILE")" \
+     "https://www.eqsl.cc/qslcard/importADIF.cfm?EQSL_USER=$ENCODED_USERNAME&EQSL_PSWD=$ENCODED_PASSWORD")
 ```
 The script uses curl to upload the new log entries to eQSL.cc
 
 Parse Response: 
 ```
-
+# Parse the response to get the number of records added and duplicates
+RECORDS_ADDED=$(echo "$RESPONSE" | grep -oP 'Result: \K\d+(?= out of \d+ records added)')
+TOTAL_RECORDS=$(echo "$RESPONSE" | grep -oP 'Result: \d+ out of \K\d+(?= records added)')
+DUPLICATES=$((TOTAL_RECORDS - RECORDS_ADDED))
 ```
 The script parses the response from eQSL to determine the number of records added and duplicates found.
 
 Handle Upload Result: Based on the parsed response, the script logs the result of the upload (success, duplicates, or errors).
 Update Last Line File: 
 ```
+# Check if any records were added successfully
+if [ -z "$RECORDS_ADDED" ]; then
+    RECORDS_ADDED=0
+fi
 
+if [ -z "$TOTAL_RECORDS" ]; then
+    TOTAL_RECORDS=0
+fi
+
+if [ "$RECORDS_ADDED" -gt 0 ]; then
+    log_message "$RECORDS_ADDED records uploaded successfully, $DUPLICATES duplicate(s) found"
+    echo "$RECORDS_ADDED records uploaded successfully, $DUPLICATES duplicate(s) found"
+    # Update the stored last line with the current last line after a successful upload
+    echo "$CURRENT_LAST_LINE" > "$LAST_LINE_FILE"
+elif [ "$DUPLICATES" -gt 0 ]; then
+    log_message "No new records uploaded. $DUPLICATES duplicate(s) found"
+    echo "No new records uploaded. $DUPLICATES duplicate(s) found"
+else
+    log_message "Error uploading log to eQSL.cc. Check $LOG_OUTPUT for details"
+    echo "Error uploading log to eQSL.cc. Check $LOG_OUTPUT for details"
+    echo "Server response: $RESPONSE" >> "$LOG_OUTPUT"
+fi
 ```
 After a successful upload, the script updates the last line file with the most recent log entry, preparing for the next run.
 
 Cleanup: 
 ```
-
+# Clean up the temporary file
+rm "$TEMP_FILE"
 ```
 The temporary file is removed after the upload process.
 
