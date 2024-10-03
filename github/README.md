@@ -27,63 +27,63 @@ cat ~/.ssh/id_ed25519.pub
 - Paste your public key and give it a title.
 - Click "Add SSH key".
 ### Clone the repository:
-- In your terminal, navigate to where you want to store the local copy, e.g. "ham-logs".
+- In your terminal, navigate to where you want to store the local copy, e.g. "ham-s".
 - Run:
 ```
-git clone git@github.com:yourusername/ham-logs.git
+git clone git@github.com:yourusername/ham-s.git
 ```
-- Change into the new directory: cd ham-logs
+- Change into the new directory: cd ham-s
 ### Create the script:
-- Create a new file named github_update.sh in the ham-logs directory.
+- Create a new file named github_update.sh in the ham-s directory.
 - Copy the following code into the file:
 ```
 #!/bin/bash
 set -e
 
 # Set the paths
-REPO_DIR=~/ham-logs
-WSJT_X_LOG=~/.local/share/WSJT-X/wsjtx_log.adi
-REPO_LOG=$REPO_DIR/wsjtx_log.adi
-UPDATE_LOG=$REPO_DIR/github_update.log
+REPO_DIR=~/ham-s
+WSJT_X_=~/.local/share/WSJT-X/wsjtx_.adi
+REPO_=$REPO_DIR/wsjtx_.adi
+UPDATE_=$REPO_DIR/github_update.
 
-# Function to log messages
-log_message() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$UPDATE_LOG"
+# Function to  messages
+_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$UPDATE_"
 }
 
 echo "Starting push process..."
-log_message "Starting push process"
+_message "Starting push process"
 
 # Change to the repository directory
 cd $REPO_DIR
 
-# Copy the WSJT-X log file to the repo
-cp $WSJT_X_LOG $REPO_LOG
+# Copy the WSJT-X  file to the repo
+cp $WSJT_X_ $REPO_
 
-# Add the log file to git
-git add -f $REPO_LOG
+# Add the  file to git
+git add -f $REPO_
 
 # Check if there are changes to commit
 if git diff --staged --quiet; then
     echo "No changes to commit."
-    log_message "No changes to commit"
+    _message "No changes to commit"
 else
     # Commit changes
-    commit_message="Update log file $(date)"
+    commit_message="Update  file $(date)"
     git commit -m "$commit_message"
 
     # Push to GitHub
     if git push origin main; then
         echo "Changes pushed to GitHub."
-        log_message "Successfully pushed changes to GitHub: $commit_message"
+        _message "Successfully pushed changes to GitHub: $commit_message"
     else
         echo "Failed to push changes to GitHub."
-        log_message "Failed to push changes to GitHub"
+        _message "Failed to push changes to GitHub"
     fi
 fi
 
 echo "Push process completed."
-log_message "Push process completed"
+_message "Push process completed"
 ```
 
 ### Make the script executable:
@@ -97,12 +97,12 @@ crontab -e
 ```
 - Add this line to run the script every 5 minutes:
 ```
-*/5 * * * * /path/to/ham-logs/github_update.sh
+*/5 * * * * /path/to/ham-s/github_update.sh
 ```
 ### Initial commit:
 - Add the script to your repository:
 ```
-git add log_sync.sh
+git add github_update.sh
 git commit -m "Add log sync script"
 git push origin main
 ```
