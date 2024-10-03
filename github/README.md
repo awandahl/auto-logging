@@ -5,7 +5,7 @@
 - Go to GitHub.com and log in to your account.
 - Click the "+" icon in the top-right corner and select "New repository".
 - Name your repository (e.g., "ham-logs").
-- Choose to make it public or private.
+- Choose to make it private, at least that is what I did.
 - Initialize with a README if you want.
 - Click "Create repository".
   
@@ -27,21 +27,21 @@ cat ~/.ssh/id_ed25519.pub
 - Paste your public key and give it a title.
 - Click "Add SSH key".
 ### Clone the repository:
-- In your terminal, navigate to where you want to store the local copy, e.g. "ham-s".
+- In your terminal, navigate to where you want to store the local copy, e.g., "ham-logs".
 - Run:
 ```
-git clone git@github.com:yourusername/ham-s.git
+git clone git@github.com:yourusername/ham-logs.git
 ```
-- Change into the new directory: cd ham-s
+- Change into the new directory: cd ham-logs
 ### Create the script:
-- Create a new file named github_update.sh in the ham-s directory.
+- Create a new file named github_update.sh in the ham-logs directory.
 - Copy the following code into the file:
 ```
 #!/bin/bash
 set -e
 
 # Set the paths
-REPO_DIR=~/ham-s
+REPO_DIR=~/ham-logs
 WSJT_X_=~/.local/share/WSJT-X/wsjtx_.adi
 REPO_=$REPO_DIR/wsjtx_.adi
 UPDATE_=$REPO_DIR/github_update.
@@ -97,7 +97,7 @@ crontab -e
 ```
 - Add this line to run the script every 5 minutes:
 ```
-*/5 * * * * /path/to/ham-s/github_update.sh
+*/5 * * * * /path/to/ham-logs/github_update.sh
 ```
 ### Initial commit:
 - Add the script to your repository:
